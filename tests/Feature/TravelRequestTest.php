@@ -2,8 +2,8 @@
 
 namespace Tests\Feature;
 
-use App\Models\TravelRequest;
 use App\Models\User;
+use App\Models\TravelRequest;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 

@@ -32,18 +32,21 @@ class TravelRequestController extends Controller
 
     public function store(TravelRequestRequest $request)
     {
-        $data = $request->validated();
+        return $request;
+        /*$data = $request->validated();
         $data['user_id'] = Auth::id();
 
         $travelRequest = TravelRequest::create($data);
 
-        return response()->json($travelRequest, 201);
+        return response()->json($travelRequest, 201);*/
     }
 
     public function show($id)
     {
-        $request = TravelRequest::where('user_id', Auth::id())->findOrFail($id);
-        return response()->json($request);
+        $request = TravelRequest::where('id', $id)
+                        ->where('user_id', Auth::id())
+                        ->firstOrFail();
+
     }
 
     public function updateStatus(Request $request, $id)
@@ -54,9 +57,6 @@ class TravelRequestController extends Controller
 
         if ($travelRequest->user_id === Auth::id()) {
             return response()->json(['error' => 'Usuário não pode alterar o próprio status'], 403);
-        }
-
-        if ($travelRequest->status === 'aprovado' && $request->status === 'cancelado') {
         }
 
         $travelRequest->status = $request->status;
