@@ -1,0 +1,37 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: ./docker/php/Dockerfile
+    container_name: travel_app
+    restart: unless-stopped
+    working_dir: /var/www/html
+    volumes:
+      - .:/var/www/html
+    ports:
+      - 8000:8000
+    depends_on:
+      - db
+    environment:
+      - DB_HOST=db
+      - DB_PORT=3306
+      - DB_DATABASE=travel
+      - DB_USERNAME=root
+      - DB_PASSWORD=root
+
+  db:
+    image: mysql:8.0
+    container_name: travel_db
+    restart: always
+    environment:
+      MYSQL_DATABASE: travel
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - 33060:3306
+    volumes:
+      - dbdata:/var/lib/mysql
+
+volumes:
+  dbdata:
