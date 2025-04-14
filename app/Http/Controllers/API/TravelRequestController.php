@@ -32,13 +32,12 @@ class TravelRequestController extends Controller
 
     public function store(TravelRequestRequest $request)
     {
-        return $request;
-        /*$data = $request->validated();
+        $data = $request->validated();
         $data['user_id'] = Auth::id();
 
         $travelRequest = TravelRequest::create($data);
 
-        return response()->json($travelRequest, 201);*/
+        return response()->json($travelRequest, 201);
     }
 
     public function show($id)
