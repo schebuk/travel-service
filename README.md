@@ -21,10 +21,18 @@ Configure as variáveis de ambiente no .env.
 Copiar
 Editar
 docker-compose up -d --build
-docker-compose exec app composer install
-docker-compose exec app php artisan key:generate
-docker-compose exec app php artisan migrate
-docker-compose exec app php artisan jwt:secret
+docker-compose exec travel_app composer install
+docker-compose exec travel_app php artisan key:generate
+docker-compose exec travel_app php artisan migrate
+docker-compose exec travel_app php artisan jwt:secret
+```
+
+##Seed no db
+
+para gerar o usuario teste "joao@teste.com" com a senha "senha_forte"
+```bash
+docker-compose exec travel_app php artisan db:seed --class=UserSeeder 
+docker-compose exec travel_app php artisan db:seed --class=TravelRequestSeeder
 ```
 
 ## Autenticação
@@ -42,7 +50,5 @@ PATCH /api/requests/{id}/status: Atualiza status (aprovado ou cancelado)
 
 ## Testes
 ```bash
-Copiar
-Editar
-docker-compose exec app php artisan test
+docker-compose exec travel_app php artisan test
 ```
