@@ -18,8 +18,6 @@ Configure as variáveis de ambiente no .env.
 
 ## Subir com Docker
 ```bash
-Copiar
-Editar
 docker-compose up -d --build
 docker-compose exec travel_app composer install
 docker-compose exec travel_app php artisan key:generate
